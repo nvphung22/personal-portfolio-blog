@@ -3,6 +3,9 @@
 // PAGES
 @import './index';
 
+// COMPONENTS
+@import './header.scss';
+
 html, body {
   height:100%;
   width:100%;
@@ -15,4 +18,8 @@ html, body {
   font-weight: bold;
   letter-spacing: 2px;
   color: white;
+}
+
+.absolute {
+  position: absolute;
 }
