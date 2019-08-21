@@ -47,7 +47,7 @@ export default class Example extends React.Component {
                 <BootstrapNavLink route='/about' title='About' />
               </NavItem>
               <NavItem className="port-navbar-item">
-                <BootstrapNavLink route='/portfolio' title='Portfolio' />
+                <BootstrapNavLink route='/portfolios' title='Portfolio' />
               </NavItem>
               <NavItem className="port-navbar-item">
                 <BootstrapNavLink route='/blogs' title='Blog' />
