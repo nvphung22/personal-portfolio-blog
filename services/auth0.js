@@ -12,7 +12,7 @@ class Auth0 {
         });
     }
 
-    handleAuthenication = () => {
+    handleAuthentication = () => {
         return new Promise((resolve, reject) => {
             this.auth0.parseHash((err, authResult) => {
                 if (authResult && authResult.accessToken && authResult.expiresIn) {
@@ -46,9 +46,25 @@ class Auth0 {
         })
     }
 
-    isAuthenicated = () => {
+    isAuthenticated = () => {
         const expiresAt = Cookies.getJSON('expiresAt');
         return new Date().getTime() < expiresAt;
+    }
+
+    clientAuth = () => {
+        return this.isAuthenticated();
+    }
+
+    serverAuth = (req) => {
+        if(req.headers.cookie) {
+            const expiresAtCookie = req.headers.cookie.split(';').find(c => c.trim().startsWith('expiresAt='));
+            if(!expiresAtCookie) {
+                return undefined; // or return false
+            }
+
+            const expiresAt = expiresAtCookie.split('=')[1];
+            return new Date().getTime() < expiresAt;
+        }
     }
 }
 

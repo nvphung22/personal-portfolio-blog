@@ -7,7 +7,7 @@ import { withRouter } from 'next/router';
 class Callback extends React.Component {
 
     async componentDidMount() {
-        await auth0Client.handleAuthenication();
+        await auth0Client.handleAuthentication();
         this.props.router.push('/')
     }
 
@@ -15,7 +15,7 @@ class Callback extends React.Component {
         return (
             <BaseLayout>
                 <BasePage>
-                    <h1> Authenicating... </h1>
+                    <h1> Authenticating... </h1>
                 </BasePage>
             </BaseLayout>
         )
