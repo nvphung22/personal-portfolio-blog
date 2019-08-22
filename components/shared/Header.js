@@ -27,7 +27,7 @@ const LoginBtn = () => {
 
 const LogoutBtn = () => {
   return (
-    <span className="nav-link port-navbar-link clickable">Logout</span>
+    <span onClick={auth0Client.logout} className="nav-link port-navbar-link clickable">Logout</span>
   )
 }
 
@@ -68,12 +68,16 @@ export default class Header extends React.Component {
               <NavItem className="port-navbar-item">
                 <BootstrapNavLink route='/cv' title='CV' />
               </NavItem>
-              <NavItem className="port-navbar-item">
-                <LoginBtn />
-              </NavItem>
-              <NavItem className="port-navbar-item">
-                <LogoutBtn />
-              </NavItem>
+              {
+                !auth0Client.isAuthenicated() ?
+                  <NavItem className="port-navbar-item">
+                    <LoginBtn />
+                  </NavItem>
+                  :
+                  <NavItem className="port-navbar-item">
+                    <LogoutBtn />
+                  </NavItem>
+              }
             </Nav>
           </Collapse>
         </Navbar>
