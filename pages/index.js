@@ -3,7 +3,7 @@ import Typed from 'react-typed';
 
 import BaseLayout from '../components/layouts/BaseLayout';
 
-import { Button, Container, Row, Col } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 
 class Index extends React.Component {
 
@@ -14,6 +14,8 @@ class Index extends React.Component {
   }
 
   render() {
+
+    const {isAuthenticated, user} = this.props.auth; 
 
     return (
       <BaseLayout className="cover" {...this.props.auth}>
@@ -44,7 +46,10 @@ class Index extends React.Component {
               <Col md="6" className="hero-welcome-wrapper">
                 <div className="hero-welcome-text">
                   <h1>
-                    Welcome to the portfolio website of Filip Jerga.
+                    {
+                      isAuthenticated && <p>Hi {user.name},</p>
+                    }
+                    Welcome to the portfolio website of PhungNV.
                     Get informed, collaborate and discover projects I was working on through the years!
                   </h1>
                 </div>

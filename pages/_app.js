@@ -10,8 +10,8 @@ export default class MyApp extends App {
   // Component is each every Page we have
   static async getInitialProps({ Component, router, ctx }) {
     let pageProps = {};
-    const isAuthenticated = process.browser ? auth0.clientAuth() : auth0.serverAuth(ctx.req);
-    const auth = { isAuthenticated };// isAuthenticated is just a value but we need an object
+    const user = process.browser ? auth0.clientAuth() : auth0.serverAuth(ctx.req);
+    const auth = { user, isAuthenticated: !!user };// isAuthenticated is just a value but we need an object
 
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx)
@@ -25,7 +25,7 @@ export default class MyApp extends App {
 
     return (
       <Container>
-        <Component {...pageProps} auth={auth} /> 
+        <Component {...pageProps} auth={auth} />
       </Container>
     )
   }
