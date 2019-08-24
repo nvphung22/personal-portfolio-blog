@@ -1,6 +1,7 @@
 import auth0 from 'auth0-js';
 import Cookies from 'js-cookie';
-import jwt from 'jsonwebtoken'
+import jwt from 'jsonwebtoken';
+import axios from 'axios';
 class Auth0 {
     constructor() {
         this.auth0 = new auth0.WebAuth({
@@ -46,21 +47,43 @@ class Auth0 {
         })
     }
 
-    verifyToken = (token) => {
+    getJWKS = async () => {
+        const res = await axios.get('https://phungnv.auth0.com/.well-known/jwks.json');
+        const jwks = res.data;
+        return jwks;
+    }
+
+    verifyToken = async (token) => {
         if (token) {
-            const decodedToken = jwt.decode(token);
-            const expiresAt = decodedToken.exp * 1000; //miliseconds to seconds
-            return (decodedToken && new Date().getTime() < expiresAt) ? decodedToken : undefined;
+            // complete = true -> to be able to access header in token
+            const decodedToken = jwt.decode(token, { complete: true });
+            const jwks = await this.getJWKS();
+            const jwk = jwks.keys[0];
+            // Build Certificate
+            let cert = jwk.x5c[0];
+            // devide into an array of 64-character strings. Then join then with a new line
+            cert = cert.match(/.{1,64}/g).join('\n');
+            cert = `-----BEGIN CERTIFICATE-----\n${cert}\n-----END CERTIFICATE-----`
+
+            if (jwk.kid === decodedToken.header.kid) {
+                try {
+                    const verifiedToken = jwt.verify(token, cert);
+                    const expiresAt = verifiedToken.exp * 1000; //miliseconds to seconds
+                    return (verifiedToken && new Date().getTime() < expiresAt) ? verifiedToken : undefined;
+                } catch (err) {
+                    return undefined;
+                }
+            }
         }
     }
 
-    clientAuth = () => {
+    clientAuth = async () => {
         const token = Cookies.getJSON('jwt');
-        const verifiedToken = this.verifyToken(token);
-        return  verifiedToken;
+        const verifiedToken = await this.verifyToken(token);
+        return verifiedToken;
     }
 
-    serverAuth = (req) => {
+    serverAuth = async (req) => {
         if (req.headers.cookie) {
             const tokenCookie = req.headers.cookie.split(';').find(c => c.trim().startsWith('jwt='));
             if (!tokenCookie) {
