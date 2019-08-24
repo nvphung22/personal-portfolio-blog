@@ -57,7 +57,7 @@ class Auth0 {
         if (token) {
             // complete = true -> to be able to access header in token
             const decodedToken = jwt.decode(token, { complete: true });
-            if (!decodedToken) return undefined;
+            if (!decodedToken) { return undefined; }
             const jwks = await this.getJWKS();
             const jwk = jwks.keys[0];
             // Build Certificate
