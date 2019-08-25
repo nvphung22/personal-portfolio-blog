@@ -59,4 +59,4 @@ class Protected extends React.Component {
     }
 }
 
-export default withAuth(Protected);
+export default withAuth()(Protected);
