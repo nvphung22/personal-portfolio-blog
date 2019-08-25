@@ -2,7 +2,7 @@ import React from 'react';
 import BaseLayout from '../components/layouts/BaseLayout';
 import BasePage from '../components/BasePage';
 import withAuth from '../components/hoc/withAuth';
-import axios from 'axios';
+import {getProtectedData} from '../actions'
 
 class Protected extends React.Component {
 
@@ -24,8 +24,7 @@ class Protected extends React.Component {
     }
 
     async componentDidMount() {
-        const res = await axios.get('/api/v1/protected');
-        const protectedData = res.data;
+        const protectedData = await getProtectedData();
         this.setState({
             protectedData
         })
