@@ -2,7 +2,7 @@ import React from 'react';
 import BaseLayout from '../components/layouts/BaseLayout';
 import BasePage from '../components/BasePage';
 import withAuth from '../components/hoc/withAuth';
-import {getProtectedData} from '../actions'
+import { getProtectedData } from '../actions'
 
 class Protected extends React.Component {
 
@@ -18,9 +18,9 @@ class Protected extends React.Component {
         protectedData: []
     }
 
-    static getInitialProps = () => {
-        const someProtectedValue = "some Protected Value";
-        return { someProtectedValue }
+    static async getInitialProps({ req }) {
+        const anotherProtectedValue = await getProtectedData(req);
+        return { anotherProtectedValue }
     }
 
     async componentDidMount() {
