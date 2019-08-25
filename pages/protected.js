@@ -13,7 +13,7 @@ class Protected extends React.Component {
     //     }
     // }
 
-    // we only use state here so we can write like this
+    // we only use STATE here so we can write like this
     state = {
         protectedData: []
     }
