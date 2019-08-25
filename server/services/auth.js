@@ -1,6 +1,8 @@
 const jwt = require('express-jwt');
 const jwksRsa = require('jwks-rsa');
 
+const namespace = 'http://localhost:3000'
+
 exports.checkJWT = jwt({
     secret: jwksRsa.expressJwtSecret({
         cache: true,
@@ -11,4 +13,24 @@ exports.checkJWT = jwt({
     audience: 'B10LNJYgqmnCkpbvYw2JnQXG4Ej6IFYl',
     issuer: 'https://phungnv.auth0.com/',
     algorithms: ['RS256']
-})
+});
+
+exports.checkRole = role => (req, res, next) => {
+    const user = req.user;
+    if (user && user[`${namespace}/role`] === role) {
+        next();
+    } else {
+        return res.status(401).send({ title: 'Not Authorized', detail: 'You are not authorized to access this data' })
+    }
+}
+// OTHER SYNTAX
+// exports.checkRole = function (role) {
+//     return function (req, res, next) {
+//         const user = req.user;
+//         if (user && user[`${namespace}/role`] === role) {
+//             next();
+//         } else {
+//             return res.status(401).send({ title: 'Not Authorized', detail: 'You are not authorized to access this data' })
+//         }
+//     }
+// }

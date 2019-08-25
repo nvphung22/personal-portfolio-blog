@@ -28,6 +28,10 @@ app.prepare()
             return res.json(protectedDate)
         })
 
+        server.get('/api/v1/onlysiteowner', authService.checkJWT, authService.checkRole('siteOwner'), (req, res) => {
+            return res.json(protectedDate)
+        })
+
         server.get('*', (req, res) => {
             return handle(req, res)
         })
