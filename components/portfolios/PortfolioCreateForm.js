@@ -1,5 +1,6 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
+import { Button } from 'reactstrap';
 import PortInput from '../form/PortInput';
 import PortDate from '../form/PortDate';
 
@@ -28,17 +29,12 @@ const validateInputs = (values) => {
     return errors;
 }
 
-const PortfolioCreateForm = () => (
+const PortfolioCreateForm = (props) => (
     <div>
         <Formik
             initialValues={INITIAL_VALUES}
             validate={validateInputs}
-            onSubmit={(values, { setSubmitting }) => {
-                setTimeout(() => {
-                    alert(JSON.stringify(values, null, 2));
-                    setSubmitting(false);
-                }, 400);
-            }}
+            onSubmit={props.onSubmit}
         >
             {({ isSubmitting }) => (
                 <Form>
@@ -83,9 +79,9 @@ const PortfolioCreateForm = () => (
                         canBeDisabled={true}
                         component={PortDate}
                     />
-                    <button type="submit" disabled={isSubmitting}>
+                    <Button size="lg" outline color="success" type="submit" disabled={isSubmitting}>
                         Create
-                    </button>
+                    </Button>
                 </Form>
             )}
         </Formik>

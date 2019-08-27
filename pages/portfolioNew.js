@@ -8,13 +8,17 @@ import withAuth from '../components/hoc/withAuth';
 
 class PortfolioNew extends React.Component {
 
+    createPortfolio = (portfolioDate) => {
+        alert(JSON.stringify(portfolioDate, null, 2));
+    }
+
     render() {
         return (
             <BaseLayout {...this.props.auth}>
                 <BasePage className='portfolio-create-page' title='Create new portfolio'>
                     <Row>
                         <Col md="6">
-                            <PortfolioCreateForm />
+                            <PortfolioCreateForm onSubmit={this.createPortfolio} />
                         </Col>
                     </Row>
                 </BasePage>
