@@ -1,19 +1,34 @@
-@import './shared/fonts';
+@import "./shared/fonts";
+@import "./shared/colors";
 
 // PAGES
-@import './index';
+@import "./index";
+@import "./portfolios";
 
 // COMPONENTS
-@import './header.scss';
+@import "./header.scss";
 
-html, body {
-  height:100%;
-  width:100%;
-  font-family: 'Montserrat', 'Helvetica';
+html,
+body {
+  height: 100%;
+  width: 100%;
+  font-family: "Montserrat", "Helvetica";
 }
 
 .base-page {
   padding-top: 150px;
+  color: black;
+  background-color: #ecedee;
+  min-height: 100vh;
+
+  .page-header {
+    .page-header-title {
+      font-weight: 700;
+      color: black;
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+  }
 }
 
 .self-typed {
@@ -29,4 +44,9 @@ html, body {
 
 .clickable {
   cursor: pointer;
+}
+
+.error {
+  color: red;
+  font-weight: 700;
 }
