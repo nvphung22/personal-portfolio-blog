@@ -10,9 +10,10 @@ const authService = require('./services/auth')
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = routes.getRequestHandler(app);
-const config = require('./config')
+const config = require('./config');
 
-const bookRoute = require('./routes/book')
+const bookRoute = require('./routes/book');
+const portfolioRoute = require('./routes/portfolio');
 
 const protectedDate = [
     {
@@ -43,7 +44,9 @@ app.prepare()
         server.use(bodyParser.json());
 
         server.use('/api/v1/books', bookRoute);
+        server.use('/api/v1/portfolios', portfolioRoute);
 
+        //TESTING some routes
         server.get('/api/v1/protected', authService.checkJWT, (req, res) => {
             return res.json(protectedDate);
         })
@@ -51,6 +54,7 @@ app.prepare()
         server.get('/api/v1/onlysiteowner', authService.checkJWT, authService.checkRole('siteOwner'), (req, res) => {
             return res.json(protectedDate);
         })
+        //-----------------------
 
         server.get('*', (req, res) => {
             return handle(req, res);
