@@ -12,7 +12,7 @@ const app = next({ dev });
 const handle = routes.getRequestHandler(app);
 const config = require('./config')
 
-const Book = require('./models/book')
+const bookRoute = require('./routes/book')
 
 const protectedDate = [
     {
@@ -40,29 +40,20 @@ app.prepare()
     .then(() => {
         const server = express();
 
-        server.use(bodyParser.json())
+        server.use(bodyParser.json());
 
-        server.post('/api/v1/books', (req, res) => {
-            const bookData = req.body;
-            const book = new Book(bookData);
-            book.save((err, createdBook) => {
-                if(err) {
-                    return res.status(422).send(err);
-                }
-                return res.json(createdBook);
-            })
-        })
+        server.use('/api/v1/books', bookRoute);
 
         server.get('/api/v1/protected', authService.checkJWT, (req, res) => {
-            return res.json(protectedDate)
+            return res.json(protectedDate);
         })
 
         server.get('/api/v1/onlysiteowner', authService.checkJWT, authService.checkRole('siteOwner'), (req, res) => {
-            return res.json(protectedDate)
+            return res.json(protectedDate);
         })
 
         server.get('*', (req, res) => {
-            return handle(req, res)
+            return handle(req, res);
         })
 
         server.use(function (err, req, res, next) {
