@@ -1,7 +1,8 @@
 import React from 'react';
 import BaseLayout from '../components/layouts/BaseLayout';
 import BasePage from '../components/BasePage';
-import { Row, Col, Card, CardHeader, CardBody, CardTitle, CardText, Button } from "reactstrap";
+import { Row, Col, Button } from "reactstrap";
+import PortfolioCard from '../components/portfolios/PortfolioCard'
 
 import { getPortfolios, deletePortfolio } from '../actions';
 import { Router } from '../routes';
@@ -40,27 +41,15 @@ class Portfolios extends React.Component {
     return portfolios.map((portfolio, index) => {
       return (
         <Col key={index} md="4">
-          <React.Fragment>
-            <span>
-              <Card className="portfolio-card">
-                <CardHeader className="portfolio-card-header">{portfolio.position}</CardHeader>
-                <CardBody>
-                  <p className="portfolio-card-city">{portfolio.location}</p>
-                  <CardTitle className="portfolio-card-title">{portfolio.title}</CardTitle>
-                  <CardText className="portfolio-card-text">{portfolio.description}</CardText>
-                  <div className="readMore">
-                    {isAuthenticated && isSiteOwner &&
-                      <React.Fragment>
-                        <Button onClick={() => Router.pushRoute(`/portfolio/${portfolio._id}/update`)} color='warning'>Update</Button>
-                        {'  '}
-                        <Button onClick={() => this.displayDeleteWarning(portfolio._id)} color='danger'>Delete</Button>
-                      </React.Fragment>
-                    }
-                  </div>
-                </CardBody>
-              </Card>
-            </span>
-          </React.Fragment>
+          <PortfolioCard portfolio={portfolio}>
+            {isAuthenticated && isSiteOwner &&
+              <React.Fragment>
+                <Button onClick={() => Router.pushRoute(`/portfolio/${portfolio._id}/update`)} color='warning'>Update</Button>
+                {'  '}
+                <Button onClick={() => this.displayDeleteWarning(portfolio._id)} color='danger'>Delete</Button>
+              </React.Fragment>
+            }
+          </PortfolioCard>
         </Col>
       )
     })
