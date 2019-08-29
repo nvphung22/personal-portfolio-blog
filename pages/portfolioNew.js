@@ -15,8 +15,8 @@ const INITIAL_VALUES = {
     company: '',
     position: '',
     location: '',
-    startDate: '',
-    endDate: ''
+    startDate: new Date(),
+    endDate: new Date()
 }
 
 class PortfolioNew extends React.Component {
