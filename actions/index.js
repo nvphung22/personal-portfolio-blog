@@ -7,7 +7,7 @@ const axiosInstance = axios.create({
     timeout: 3000
 })
 
-const setAuthHeader = (req) => {
+const setAuthHeader = req => {
     // if(req) { clientAuth } else { serverAuth }
     const token = req ? getCookieFromReq(req, 'jwt') : Cookies.getJSON('jwt');
     if (token) {
@@ -16,7 +16,7 @@ const setAuthHeader = (req) => {
     return undefined;
 }
 
-const rejectPromise = (resError) => {
+const rejectPromise = resError => {
     let error = {};
     if (resError && resError.response && resError.response.data) {
         error = resError.response.data;
@@ -26,36 +26,36 @@ const rejectPromise = (resError) => {
     return Promise.reject(error);
 }
 
-export const getProtectedData = async (req) => {
+export const getProtectedData = req => {
     const url = '/protected';
-    return await axiosInstance.get(url, setAuthHeader(req))
+    return axiosInstance.get(url, setAuthHeader(req))
         .then(response => response.data)
 }
 
-export const getPortfolios = async () => {
-    return await axiosInstance.get('/portfolios')
+export const getPortfolios = () => {
+    return axiosInstance.get('/portfolios')
         .then(response => response.data)
 }
 
-export const getPortfolioById = async (id) => {
-    return await axiosInstance.get(`/portfolios/${id}`)
+export const getPortfolioById = id => {
+    return axiosInstance.get(`/portfolios/${id}`)
         .then(response => response.data)
 }
 
-export const createPortfolio = async (portfolioData) => {
-    return await axiosInstance.post('/portfolios', portfolioData, setAuthHeader())
+export const createPortfolio = portfolioData => {
+    return axiosInstance.post('/portfolios', portfolioData, setAuthHeader())
         .then(response => response.data)
         .catch(err => rejectPromise(err))
 }
 
-export const updatePortfolio = async (portfolioData) => {
+export const updatePortfolio = portfolioData => {
     const portfolioId = portfolioData._id;
-    return await axiosInstance.patch(`/portfolios/${portfolioId}`, portfolioData, setAuthHeader())
+    return axiosInstance.patch(`/portfolios/${portfolioId}`, portfolioData, setAuthHeader())
         .then(response => response.data)
         .catch(err => rejectPromise(err))
 }
 
-export const deletePortfolio = (portfolioId) => {
+export const deletePortfolio = portfolioId => {
     return axiosInstance.delete(`/portfolios/${portfolioId}`, setAuthHeader())
         .then(response => response.data)
 }
