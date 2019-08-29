@@ -36,6 +36,11 @@ class Portfolios extends React.Component {
       })
   }
 
+  navigateToEdit(portfolioId, event) {
+    event.stopPropagation();
+    Router.pushRoute(`/portfolio/${portfolioId}/update`)
+  }
+
   renderPortfolios(portfolios) {
     const { isAuthenticated, isSiteOwner } = this.props.auth;
     return portfolios.map((portfolio, index) => {
@@ -44,9 +49,13 @@ class Portfolios extends React.Component {
           <PortfolioCard portfolio={portfolio}>
             {isAuthenticated && isSiteOwner &&
               <React.Fragment>
-                <Button onClick={() => Router.pushRoute(`/portfolio/${portfolio._id}/update`)} color='warning'>Update</Button>
+                <Button onClick={(event) => this.navigateToEdit(portfolio._id, event)} color='warning'>Update</Button>
                 {'  '}
-                <Button onClick={() => this.displayDeleteWarning(portfolio._id)} color='danger'>Delete</Button>
+                <Button onClick={(event) => {
+                  // another way to stopPropagation
+                  event.stopPropagation();
+                  this.displayDeleteWarning(portfolio._id)
+                }} color='danger'>Delete</Button>
               </React.Fragment>
             }
           </PortfolioCard>
