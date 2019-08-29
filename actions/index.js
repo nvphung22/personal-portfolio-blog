@@ -28,15 +28,29 @@ const rejectPromise = (resError) => {
 
 export const getProtectedData = async (req) => {
     const url = '/protected';
-    return await axiosInstance.get(url, setAuthHeader(req)).then(response => response.data)
+    return await axiosInstance.get(url, setAuthHeader(req))
+        .then(response => response.data)
 }
 
 export const getPortfolios = async () => {
-    return await axiosInstance.get('/portfolios').then(response => response.data)
+    return await axiosInstance.get('/portfolios')
+        .then(response => response.data)
+}
+
+export const getPortfolioById = async (id) => {
+    return await axiosInstance.get(`/portfolios/${id}`)
+        .then(response => response.data)
 }
 
 export const createPortfolio = async (portfolioData) => {
     return await axiosInstance.post('/portfolios', portfolioData, setAuthHeader())
+        .then(response => response.data)
+        .catch(err => rejectPromise(err))
+}
+
+export const updatePortfolio = async (portfolioData) => {
+    const portfolioId = portfolioData._id;
+    return await axiosInstance.patch(`/portfolios/${portfolioId}`, portfolioData, setAuthHeader())
         .then(response => response.data)
         .catch(err => rejectPromise(err))
 }

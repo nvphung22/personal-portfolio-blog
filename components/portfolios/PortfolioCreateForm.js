@@ -4,16 +4,6 @@ import { Alert, Button } from 'reactstrap';
 import PortInput from '../form/PortInput';
 import PortDate from '../form/PortDate';
 
-const INITIAL_VALUES = {
-    title: '',
-    description: '',
-    company: '',
-    position: '',
-    location: '',
-    startDate: '',
-    endDate: ''
-}
-
 const validateInputs = (values) => {
     let errors = {};
     Object.entries(values).forEach(([key, value]) => {
@@ -30,12 +20,14 @@ const validateInputs = (values) => {
     return errors;
 }
 
-const PortfolioCreateForm = (props) => (
+// const PortfolioCreateForm = (props) => (
+// destruct from PROPS
+const PortfolioCreateForm = ({ initialValues, onSubmit, error }) => (
     <div>
         <Formik
-            initialValues={INITIAL_VALUES}
+            initialValues={initialValues}
             validate={validateInputs}
-            onSubmit={props.onSubmit}
+            onSubmit={onSubmit}
         >
             {({ isSubmitting }) => (
                 <Form>
@@ -71,20 +63,22 @@ const PortfolioCreateForm = (props) => (
                     />
                     <Field
                         name="startDate"
+                        initialDate={initialValues.startDate}
                         label="Start Date"
                         component={PortDate}
                     />
                     <Field
                         name="endDate"
+                        initialDate={initialValues.endDate}
                         label="End Date"
                         canBeDisabled={true}
                         component={PortDate}
                     />
 
                     {
-                        props.error &&
+                        error &&
                         <Alert color="danger">
-                            {props.error}
+                            {error}
                         </Alert>
                     }
                     <Button size="lg" outline color="success" type="submit" disabled={isSubmitting}>

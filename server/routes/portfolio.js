@@ -7,6 +7,8 @@ router.post('', authService.checkJWT, authService.checkRole('siteOwner'), portfo
 
 router.get('', portfolioCtrl.getPortfolios);
 
+router.get('/:id', portfolioCtrl.getPortfolioById);
+
 router.patch('/:id', authService.checkJWT, authService.checkRole('siteOwner'), portfolioCtrl.updatePortfolio);
 
 router.delete('/:id', authService.checkJWT, authService.checkRole('siteOwner'), portfolioCtrl.deletePortfolio);
