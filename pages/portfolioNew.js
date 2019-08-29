@@ -5,20 +5,42 @@ import PortfolioCreateForm from '../components/portfolios/PortfolioCreateForm';
 import { Row, Col } from 'reactstrap';
 
 import withAuth from '../components/hoc/withAuth';
+import { createPortfolio } from '../actions'
+import { Router } from '../routes';
 
 class PortfolioNew extends React.Component {
+    constructor(props) {
+        super();
+        this.state = {
+            error: undefined
+        }
+    }
 
-    createPortfolio = (portfolioDate) => {
-        alert(JSON.stringify(portfolioDate, null, 2));
+    savePortfolio = (portfolioData, { setSubmitting }) => {
+        setSubmitting(true);
+        createPortfolio(portfolioData)
+            .then(_ => {
+                this.setState({
+                    error: undefined
+                });
+                setSubmitting(false);
+                Router.pushRoute('/portfolios');
+            })
+            .catch(err => {
+                const error = err.message || 'Server Error!';
+                setSubmitting(false);
+                this.setState({ error })
+            })
     }
 
     render() {
+        const { error } = this.state;
         return (
             <BaseLayout {...this.props.auth}>
                 <BasePage className='portfolio-create-page' title='Create new portfolio'>
                     <Row>
                         <Col md="6">
-                            <PortfolioCreateForm onSubmit={this.createPortfolio} />
+                            <PortfolioCreateForm error={error} onSubmit={this.savePortfolio} />
                         </Col>
                     </Row>
                 </BasePage>
