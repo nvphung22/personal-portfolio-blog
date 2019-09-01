@@ -12,8 +12,10 @@ const app = next({ dev });
 const handle = routes.getRequestHandler(app);
 const config = require('./config');
 
-const bookRoute = require('./routes/book');
-const portfolioRoute = require('./routes/portfolio');
+// ROUTES
+const bookRoutes = require('./routes/book');
+const portfolioRoutes = require('./routes/portfolio');
+const blogRoutes = require('./routes/blog');
 
 const protectedDate = [
     {
@@ -43,8 +45,9 @@ app.prepare()
 
         server.use(bodyParser.json());
 
-        server.use('/api/v1/books', bookRoute);
-        server.use('/api/v1/portfolios', portfolioRoute);
+        server.use('/api/v1/books', bookRoutes);
+        server.use('/api/v1/portfolios', portfolioRoutes);
+        server.use('/api/v1/blogs', blogRoutes);
 
         //TESTING some routes
         server.get('/api/v1/protected', authService.checkJWT, (req, res) => {
