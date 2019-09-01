@@ -3,6 +3,7 @@ import { Editor } from 'slate-react';
 import { renderMark, renderBlock } from './renderers';
 import { HoverMenu } from './HoverMenu';
 import { initialValue } from './initial-value';
+import { ControlMenu } from './ControlMenu'
 
 export default class SlateEditor extends React.Component {
     state = {
@@ -56,14 +57,17 @@ export default class SlateEditor extends React.Component {
 
     render() {
         return (
-            <Editor
-                placeholder="Enter some text..."
-                value={this.state.value}
-                onChange={this.onChange}
-                renderMark={renderMark}
-                renderBlock={renderBlock}
-                renderEditor={this.renderEditor}
-            />
+            <React.Fragment>
+                <ControlMenu isSaving={this.props.isSaving} saveBlog={this.props.saveBlog} />
+                <Editor
+                    placeholder="Enter some text..."
+                    value={this.state.value}
+                    onChange={this.onChange}
+                    renderMark={renderMark}
+                    renderBlock={renderBlock}
+                    renderEditor={this.renderEditor}
+                />
+            </React.Fragment>
         )
     }
 

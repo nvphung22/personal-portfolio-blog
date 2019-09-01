@@ -32,6 +32,8 @@ export const getProtectedData = req => {
         .then(response => response.data)
 }
 
+// PORTFOLIOS
+
 export const getPortfolios = () => {
     return axiosInstance.get('/portfolios')
         .then(response => response.data)
@@ -57,5 +59,43 @@ export const updatePortfolio = portfolioData => {
 
 export const deletePortfolio = portfolioId => {
     return axiosInstance.delete(`/portfolios/${portfolioId}`, setAuthHeader())
+        .then(response => response.data)
+}
+
+// BLOGS
+
+export const getBlogs = () => {
+    return axiosInstance.get('/blogs')
+        .then(response => response.data)
+}
+
+export const getBlogById = id => {
+    return axiosInstance.get(`/blogs/${id}`)
+        .then(response => response.data)
+}
+
+export const createBlog = blogData => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve("Saved")
+        }, 1000)
+    })
+}
+
+// export const createBlog = blogData => {
+//     return axiosInstance.post('/blogs', blogData, setAuthHeader())
+//         .then(response => response.data)
+//         .catch(err => rejectPromise(err))
+// }
+
+export const updateBlog = blogData => {
+    const blogId = blogData._id;
+    return axiosInstance.patch(`/blogs/${blogId}`, blogData, setAuthHeader())
+        .then(response => response.data)
+        .catch(err => rejectPromise(err))
+}
+
+export const deleteBlog = blogId => {
+    return axiosInstance.delete(`/blogs/${blogId}`, setAuthHeader())
         .then(response => response.data)
 }

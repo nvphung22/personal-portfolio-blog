@@ -3,14 +3,26 @@ import BaseLayout from '../components/layouts/BaseLayout';
 import BasePage from '../components/BasePage';
 import withAuth from '../components/hoc/withAuth';
 import SlateEditor from '../components/slate-editor/Editor';
-
+import { createBlog } from '../actions';
 class BlogEditor extends React.Component {
 
     constructor(props) {
         super();
         this.state = {
-            isLoaded: false
+            isLoaded: false,
+            isSaving: false
         }
+    }
+
+    saveBlog = (heading) => {
+        const blog = {};
+        blog.title = heading.title;
+        blog.subTitle = heading.subTitle;
+        this.setState({ isSaving: true });
+        createBlog().then(_ => {
+            this.setState({ isSaving: false });
+            console.log(_)
+        })
     }
 
     componentDidMount() {
@@ -20,13 +32,13 @@ class BlogEditor extends React.Component {
     }
 
     render() {
-        const { isLoaded } = this.state;
+        const { isLoaded, isSaving } = this.state;
         return (
             <BaseLayout {...this.props.auth}>
-                <BasePage containerClass='editor-wrapper' className='blog-editor-page' title='Write your story'>
+                <BasePage containerClass='editor-wrapper' className='blog-editor-page'>
                     {
                         // to avoid the error: 'window is undefined' in HoverMenu.js
-                        isLoaded && <SlateEditor />
+                        isLoaded && <SlateEditor isSaving={isSaving} saveBlog={this.saveBlog} />
                     }
                 </BasePage>
             </BaseLayout>
