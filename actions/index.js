@@ -74,19 +74,20 @@ export const getBlogById = id => {
         .then(response => response.data)
 }
 
-export const createBlog = blogData => {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve("Saved")
-        }, 1000)
-    })
-}
-
+// TEST
 // export const createBlog = blogData => {
-//     return axiosInstance.post('/blogs', blogData, setAuthHeader())
-//         .then(response => response.data)
-//         .catch(err => rejectPromise(err))
+//     return new Promise((resolve, reject) => {
+//         setTimeout(() => {
+//             resolve("Saved")
+//         }, 1000)
+//     })
 // }
+
+export const createBlog = blogData => {
+    return axiosInstance.post('/blogs', blogData, setAuthHeader())
+        .then(response => response.data)
+        .catch(err => rejectPromise(err))
+}
 
 export const updateBlog = blogData => {
     const blogId = blogData._id;

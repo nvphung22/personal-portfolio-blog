@@ -1,5 +1,7 @@
 import { Button, Icon } from '../components';
-const DEFAULT_NODE = 'paragraph'
+const DEFAULT_NODE = 'paragraph';
+
+// MARKS
 
 export const MarkButton = ({ editor, type, icon }) => {
     const { value } = editor
@@ -34,6 +36,8 @@ export const renderMark = (props, editor, next) => {
             return next()
     }
 }
+
+// BLOCKS
 
 const hasBlock = (type, value) => {
     return value.blocks.some(node => node.type === type)
@@ -82,7 +86,7 @@ const onClickBlock = (event, type, editor) => {
     }
 }
 
-export const BlockButton = ({type, icon, editor}) => {
+export const BlockButton = ({ type, icon, editor }) => {
     const { value } = editor
     let isActive = hasBlock(type, value)
 
@@ -114,16 +118,16 @@ export const renderBlock = (props, editor, next) => {
             return <p {...attributes}>{children}</p>
         case 'block-quote':
             return <blockquote {...attributes}>{children}</blockquote>
+        case 'numbered-list':
+            return <ol {...attributes}>{children}</ol>
         case 'bulleted-list':
             return <ul {...attributes}>{children}</ul>
+        case 'list-item':
+            return <li {...attributes}>{children}</li>
         case 'heading-one':
             return <h1 {...attributes}>{children}</h1>
         case 'heading-two':
             return <h2 {...attributes}>{children}</h2>
-        case 'list-item':
-            return <li {...attributes}>{children}</li>
-        case 'numbered-list':
-            return <ol {...attributes}>{children}</ol>
         default:
             return next()
     }

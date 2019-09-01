@@ -3,7 +3,11 @@ import { Editor } from 'slate-react';
 import { renderMark, renderBlock } from './renderers';
 import { HoverMenu } from './HoverMenu';
 import { initialValue } from './initial-value';
-import { ControlMenu } from './ControlMenu'
+import { ControlMenu } from './ControlMenu';
+import Html from 'slate-html-serializer';
+import { rules } from './rules';
+
+const html = new Html({ rules })
 
 export default class SlateEditor extends React.Component {
     state = {
@@ -55,10 +59,32 @@ export default class SlateEditor extends React.Component {
             rect.width / 2}px`
     }
 
+    getTitle = () => {
+        const { value } = this.state;
+        const firstBlock = value.document.getBlocks().get(0);
+        const secondBlock = value.document.getBlocks().get(1);
+
+        const title = firstBlock && firstBlock.text ? firstBlock.text : 'No title';
+        const subTitle = secondBlock && secondBlock.text ? secondBlock.text : 'No sub-title';
+        return {
+            title,
+            subTitle
+        }
+    }
+
+    save = () => {
+        const { value } = this.state;
+        const { isSaving, saveBlog } = this.props;
+        const headingValues = this.getTitle();
+        const text = html.serialize(value);
+        // prevent multiple savings
+        !isSaving && saveBlog(text, headingValues);
+    }
+
     render() {
         return (
             <React.Fragment>
-                <ControlMenu isSaving={this.props.isSaving} saveBlog={this.props.saveBlog} />
+                <ControlMenu isSaving={this.props.isSaving} saveBlog={this.save} />
                 <Editor
                     placeholder="Enter some text..."
                     value={this.state.value}
