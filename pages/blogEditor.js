@@ -11,17 +11,19 @@ class BlogEditor extends React.Component {
         super();
         this.state = {
             isLoaded: false,
-            isSaving: false
+            isSaving: false,
+            lockKey: Math.floor(1000 + Math.random() * 9000) // generate 4 random numbers
         }
     }
 
     saveBlog = (story, heading) => {
+        const { lockKey } = this.state;
         const blog = {};
         blog.title = heading.title;
         blog.subTitle = heading.subTitle;
         blog.story = story;
         this.setState({ isSaving: true });
-        createBlog(blog)
+        createBlog(blog, lockKey)
             .then(createdBlog => {
                 this.setState({ isSaving: false });
                 Router.pushRoute(`/blogs/${createdBlog._id}/update`)

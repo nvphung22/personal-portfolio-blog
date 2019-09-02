@@ -83,8 +83,8 @@ export const getBlogById = id => {
 //     })
 // }
 
-export const createBlog = blogData => {
-    return axiosInstance.post('/blogs', blogData, setAuthHeader())
+export const createBlog = (blogData, lockKey) => {
+    return axiosInstance.post(`/blogs?lockKey=${lockKey}`, blogData, setAuthHeader())
         .then(response => response.data)
         .catch(err => rejectPromise(err))
 }
