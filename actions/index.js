@@ -89,9 +89,8 @@ export const createBlog = (blogData, lockKey) => {
         .catch(err => rejectPromise(err))
 }
 
-export const updateBlog = blogData => {
-    const blogId = blogData._id;
-    return axiosInstance.patch(`/blogs/${blogId}`, blogData, setAuthHeader())
+export const updateBlog = (blogId, newBlogData) => {
+    return axiosInstance.patch(`/blogs/${blogId}`, newBlogData, setAuthHeader())
         .then(response => response.data)
         .catch(err => rejectPromise(err))
 }

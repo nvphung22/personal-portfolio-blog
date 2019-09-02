@@ -21,6 +21,21 @@ export default class SlateEditor extends React.Component {
     onChange = ({ value }) => {
         this.setState({ value })
     }
+
+    onKeyDown = (event, change, next) => {
+        const { isLoading } = this.props;
+
+        // ----- AUTO SAVE WHEN Ctrl + S OR Command + S -----
+        // 83: button S
+        // ctrlKey: button Ctrl
+        // metaKey: button Command
+        if (!isLoading && event.which === 83 && (event.ctrlKey || event.metaKey)) {
+            event.preventDefault();
+            this.save();
+        }
+        next();
+    }
+    
     /**
     * On update, update the menu.
     */
@@ -94,6 +109,7 @@ export default class SlateEditor extends React.Component {
                     placeholder="Enter some text..."
                     value={this.state.value}
                     onChange={this.onChange}
+                    onKeyDown={this.onKeyDown}
                     renderMark={renderMark}
                     renderBlock={renderBlock}
                     renderEditor={this.renderEditor}
