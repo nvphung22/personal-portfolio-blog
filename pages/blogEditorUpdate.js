@@ -3,9 +3,19 @@ import BaseLayout from '../components/layouts/BaseLayout';
 import BasePage from '../components/BasePage';
 import withAuth from '../components/hoc/withAuth';
 import SlateEditor from '../components/slate-editor/Editor';
-import { createBlog } from '../actions';
-import { Router } from '../routes';
-class BlogEditor extends React.Component {
+import { getBlogById } from '../actions';
+class BlogEditorUpdate extends React.Component {
+
+    static async getInitialProps({ query }) {
+        const blogId = query.id;
+        let blog = {};
+        try {
+            blog = await getBlogById(blogId);
+        } catch (err) {
+            console.err(err)
+        }
+        return { blog };
+    }
 
     constructor(props) {
         super();
@@ -22,9 +32,9 @@ class BlogEditor extends React.Component {
         blog.story = story;
         this.setState({ isSaving: true });
         createBlog(blog)
-            .then(createdBlog => {
+            .then(_ => {
                 this.setState({ isSaving: false });
-                Router.pushRoute(`/blogs/${createdBlog._id}/update`)
+                console.log(_)
             })
             .catch(err => {
                 this.setState({ isSaving: false });
@@ -40,12 +50,13 @@ class BlogEditor extends React.Component {
 
     render() {
         const { isLoaded, isSaving } = this.state;
+        const {blog} = this.props;
         return (
             <BaseLayout {...this.props.auth}>
                 <BasePage containerClass='editor-wrapper' className='blog-editor-page'>
                     {
                         // to avoid the error: 'window is undefined' in HoverMenu.js
-                        isLoaded && <SlateEditor isSaving={isSaving} saveBlog={this.saveBlog} />
+                        isLoaded && <SlateEditor initialValue={blog.story} isSaving={isSaving} saveBlog={this.saveBlog} />
                     }
                 </BasePage>
             </BaseLayout>
@@ -53,4 +64,4 @@ class BlogEditor extends React.Component {
     }
 }
 
-export default withAuth('siteOwner')(BlogEditor);
+export default withAuth('siteOwner')(BlogEditorUpdate);

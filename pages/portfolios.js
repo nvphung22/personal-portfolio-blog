@@ -38,7 +38,7 @@ class Portfolios extends React.Component {
 
   navigateToEdit(portfolioId, event) {
     event.stopPropagation();
-    Router.pushRoute(`/portfolio/${portfolioId}/update`)
+    Router.pushRoute(`/portfolios/${portfolioId}/update`)
   }
 
   renderPortfolios(portfolios) {
