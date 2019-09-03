@@ -4,6 +4,7 @@ import BasePage from '../components/BasePage';
 import withAuth from '../components/hoc/withAuth';
 import SlateEditor from '../components/slate-editor/Editor';
 import { getBlogById, updateBlog } from '../actions';
+import { toast } from 'react-toastify';
 class BlogEditorUpdate extends React.Component {
 
     static async getInitialProps({ query }) {
@@ -30,15 +31,17 @@ class BlogEditorUpdate extends React.Component {
         const newBlogData = {};
         newBlogData.title = heading.title;
         newBlogData.subTitle = heading.subTitle;
-        newBlogData.story = story;
+        newBlogData.story = '';
         this.setState({ isSaving: true });
         updateBlog(blogId, newBlogData)
             .then(_ => {
                 this.setState({ isSaving: false });
+                toast.success("Saved successfully!");
             })
             .catch(err => {
                 this.setState({ isSaving: false });
-                console.error(err.message || "Server Error!");
+                const error = err.message || "Server Error!";
+                toast.error(error);
             })
     }
 
@@ -50,7 +53,7 @@ class BlogEditorUpdate extends React.Component {
 
     render() {
         const { isLoaded, isSaving } = this.state;
-        const {blog} = this.props;
+        const { blog } = this.props;
         return (
             <BaseLayout {...this.props.auth}>
                 <BasePage containerClass='editor-wrapper' className='blog-editor-page'>
