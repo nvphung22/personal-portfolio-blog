@@ -179,3 +179,22 @@
     display: block;
   }
 }
+
+// -----USER'S BLOGS
+.user-blog-page {
+  .blog-type {
+    font-weight: bold;
+  }
+  .user-blogs-list {
+    list-style: none;
+    padding-left: 0;
+
+    li {
+      font-size: 25px;
+    }
+
+    a {
+      color: #424242;
+    }
+  }
+}

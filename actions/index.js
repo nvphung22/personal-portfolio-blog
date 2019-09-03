@@ -99,3 +99,9 @@ export const deleteBlog = blogId => {
     return axiosInstance.delete(`/blogs/${blogId}`, setAuthHeader())
         .then(response => response.data)
 }
+
+// USER BLOGS
+export const getUserBlogs = (req) => {
+    return axiosInstance.get('/blogs/me', setAuthHeader(req))
+        .then(response => response.data)
+}

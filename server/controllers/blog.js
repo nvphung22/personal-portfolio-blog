@@ -2,6 +2,18 @@ const Blog = require('../models/blog');
 var AsyncLock = require('async-lock');
 var lock = new AsyncLock();
 
+
+// -----User's blogs-----
+exports.getUserBlogs = (req, res) => {
+    const userId = req.user.sub;
+    Blog.find({userId}, (err, userBlogs) => {
+        err && res.status(422).send(err);
+        res.json(userBlogs);
+    })
+}
+
+// ------
+
 exports.getBlogs = (req, res) => {
     Blog.find()
         .sort({ 'startDate': -1 })
