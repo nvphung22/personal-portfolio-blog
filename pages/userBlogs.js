@@ -5,6 +5,7 @@ import withAuth from '../components/hoc/withAuth';
 import { Container, Row, Col } from 'reactstrap';
 import { getUserBlogs } from '../actions';
 import { Link } from '../routes';
+import PortButtonDropdown from '../components/ButtonDropdown';
 
 class UserBlog extends React.Component {
 
@@ -18,6 +19,29 @@ class UserBlog extends React.Component {
         return { userBlogs }
     }
 
+    changeBlogStatus = () => {
+        alert("change status");
+    }
+
+    deleteBlog = () => {
+        alert("delete blog")
+    }
+
+    dropdownOptions(blog) {
+        const firstOpt = blog.status === 'draft' ? 'Publish' : 'Make draft';
+        const secondOpt = 'Delete';
+        return [
+            {
+                text: firstOpt,
+                handler: this.changeBlogStatus
+            },
+            {
+                text: secondOpt,
+                handler: this.deleteBlog
+            }
+        ]
+    }
+
     separateBlogs = (blogs) => {
         const published = [];
         const drafts = [];
@@ -28,7 +52,6 @@ class UserBlog extends React.Component {
     }
 
     renderBlogs = (blogs) => {
-        debugger;
         return (
             <ul className='user-blogs-list'>
                 {
@@ -38,6 +61,7 @@ class UserBlog extends React.Component {
                                 <Link route={`/blogs/${blog._id}/update`}>
                                     <a>{blog.title}</a>
                                 </Link>
+                                <PortButtonDropdown items={this.dropdownOptions(blog)} />
                             </li>
                         )
                     })
