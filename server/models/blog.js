@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const slugify = require('slugify');
 
 const blogSchema = new Schema({
     userId: { type: String, required: true },
@@ -14,5 +15,15 @@ const blogSchema = new Schema({
         timestamps: true,
         //if we only need createdAt => timestamps: { createdAt: true, updatedAt: false }
     });
+
+blogSchema.pre('save', function (next) {
+    this.slug = slugify(this.title, {
+        replacement: '-',
+        remove: null,
+        lower: true
+    })
+    next();
+    // return next();
+})
 
 module.exports = mongoose.model('Blog', blogSchema)

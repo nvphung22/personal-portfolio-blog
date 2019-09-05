@@ -31,7 +31,7 @@ class BlogEditorUpdate extends React.Component {
         const newBlogData = {};
         newBlogData.title = heading.title;
         newBlogData.subTitle = heading.subTitle;
-        newBlogData.story = '';
+        newBlogData.story = story;
         this.setState({ isSaving: true });
         updateBlog(blogId, newBlogData)
             .then(_ => {

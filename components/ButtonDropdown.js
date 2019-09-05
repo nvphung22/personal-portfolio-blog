@@ -18,7 +18,6 @@ export default class PortButtonDropdown extends React.Component {
     }
 
     renderMenu = (items) => {
-        debugger;
         return (
             <DropdownMenu>
                 {
