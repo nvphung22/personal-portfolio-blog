@@ -3,9 +3,10 @@ import BaseLayout from '../components/layouts/BaseLayout';
 import BasePage from '../components/BasePage';
 import withAuth from '../components/hoc/withAuth';
 import { Container, Row, Col } from 'reactstrap';
-import { getUserBlogs } from '../actions';
+import { getUserBlogs, updateBlog, deleteBlog } from '../actions';
 import { Link } from '../routes';
 import PortButtonDropdown from '../components/ButtonDropdown';
+import { Router } from '../routes';
 
 class UserBlog extends React.Component {
 
@@ -19,25 +20,44 @@ class UserBlog extends React.Component {
         return { userBlogs }
     }
 
-    changeBlogStatus = () => {
-        alert("change status");
+    changeBlogStatus = (blogId, status) => {
+        updateBlog(blogId, { status })
+            .then(_ => {
+                Router.pushRoute('/userBlogs')
+            })
+            .catch(err => {
+                console.error(err)
+            })
     }
 
-    deleteBlog = () => {
-        alert("delete blog")
+    deleteBlog = blogId => {
+        deleteBlog(blogId)
+            .then(_ => {
+                Router.pushRoute('/userBlogs')
+            })
+            .catch(err => {
+                console.error(err)
+            })
+    }
+
+    displayDeleteWarning(blogId) {
+        const isConfirm = confirm('Are you sure you want to delete this blog?');
+        if (isConfirm) {
+            this.deleteBlog(blogId);
+        }
     }
 
     dropdownOptions(blog) {
-        const firstOpt = blog.status === 'draft' ? 'Publish' : 'Make draft';
+        const firstOpt = blog.status === 'draft' ? { view: 'Publish', status: 'published' } : { view: 'Make draft', status: 'draft' };
         const secondOpt = 'Delete';
         return [
             {
-                text: firstOpt,
-                handler: this.changeBlogStatus
+                text: firstOpt.view,
+                handler: () => this.changeBlogStatus(blog._id, firstOpt.status)
             },
             {
                 text: secondOpt,
-                handler: this.deleteBlog
+                handler: () => this.displayDeleteWarning(blog._id)
             }
         ]
     }
