@@ -64,7 +64,7 @@ export const deletePortfolio = portfolioId => {
 
 // BLOGS
 
-export const getBlogs = () => {
+export const getPublishedBlogs = () => {
     return axiosInstance.get('/blogs')
         .then(response => response.data)
 }

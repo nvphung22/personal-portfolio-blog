@@ -9,7 +9,7 @@ router.get('/me', authService.checkJWT, authService.checkRole('siteOwner'), blog
 // ------
 router.post('', authService.checkJWT, authService.checkRole('siteOwner'), blogCtrl.createBlog);
 
-router.get('', blogCtrl.getBlogs);
+router.get('', blogCtrl.getPublishedBlogs);
 
 router.get('/:id', blogCtrl.getBlogById);
 
