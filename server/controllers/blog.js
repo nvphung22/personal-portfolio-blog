@@ -47,6 +47,18 @@ exports.getBlogById = (req, res) => {
         });
 }
 
+exports.getBlogBySlug = (req, res) => {
+    const slug = req.params.slug;
+    Blog.findOne({ slug })
+        .select('-__v')
+        .exec((err, blog) => {
+            if (err) {
+                return res.status(422).send(err);
+            }
+            return res.json(blog);
+        });
+}
+
 exports.createBlog = (req, res) => {
     const { lockKey } = req.query;
     if (!lock.isBusy(lockKey)) {

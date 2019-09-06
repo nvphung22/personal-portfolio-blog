@@ -22,7 +22,7 @@ class Blogs extends React.Component {
     blogs.map((blog, index) => (
       (
         <div key={index} className="post-preview">
-          <Link route={`/blogs/${blog.slug}`}>
+          <Link route={`/blogs/s/${blog.slug}`}>
             <a>
               <h2 className="post-title">{blog.title}</h2>
               <h3 className="post-subtitle">{blog.subTitle}</h3>

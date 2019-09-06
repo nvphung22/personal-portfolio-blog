@@ -74,6 +74,11 @@ export const getBlogById = id => {
         .then(response => response.data)
 }
 
+export const getBlogBySlug = slug => {
+    return axiosInstance.get(`/blogs/s/${slug}`)
+        .then(response => response.data)
+}
+
 // TEST
 // export const createBlog = blogData => {
 //     return new Promise((resolve, reject) => {
