@@ -5,6 +5,7 @@ import { Container, Row, Col } from 'reactstrap';
 import { Link } from '../routes';
 import { getPublishedBlogs } from '../actions'
 import { format } from 'date-fns';
+import { shortenText } from '../helpers/utils';
 
 class Blogs extends React.Component {
 
@@ -25,7 +26,7 @@ class Blogs extends React.Component {
           <Link route={`/blogs/s/${blog.slug}`}>
             <a>
               <h2 className="post-title">{blog.title}</h2>
-              <h3 className="post-subtitle">{blog.subTitle}</h3>
+              <h3 className="post-subtitle">{shortenText(blog.subTitle)}</h3>
             </a>
           </Link>
           <p className="post-meta">Posted by

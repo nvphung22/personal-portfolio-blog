@@ -4,7 +4,7 @@ const slugify = require('slugify');
 
 const blogSchema = new Schema({
     userId: { type: String, required: true },
-    title: { type: String, required: true },
+    title: { type: String, required: true, maxlength: 100 },
     subTitle: { type: String, required: true },
     // spare: allow multiple blogs with the same NULL slug
     slug: { type: String, unique: true, sparse: true },

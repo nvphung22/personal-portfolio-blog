@@ -2,7 +2,7 @@ import React from 'react';
 import BaseLayout from '../components/layouts/BaseLayout';
 import BasePage from '../components/BasePage';
 import withAuth from '../components/hoc/withAuth';
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row, Col, Button } from 'reactstrap';
 import { getUserBlogs, updateBlog, deleteBlog } from '../actions';
 import { Link } from '../routes';
 import PortButtonDropdown from '../components/ButtonDropdown';
@@ -96,6 +96,11 @@ class UserBlog extends React.Component {
             <BaseLayout {...this.props.auth}>
                 <BasePage className='user-blog-page' title=''>
                     <Container>
+                        <Row>
+                            <Link route='/blogs/new'>
+                                <Button className='mx-auto text-center' color='primary'>Create a new Blog</Button>
+                            </Link>
+                        </Row>
                         <Row>
                             <Col md='6' className='mx-auto text-center'>
                                 <h2 className='blog-type'>Published blogs</h2>
