@@ -1,11 +1,3 @@
-// MIXINS
-@mixin background-cover() {
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
 // Blog LISTING!
 
 .blog-listing-page {
@@ -68,6 +60,7 @@
     background-color: $gray-600;
     background-attachment: scroll;
     position: relative;
+    // background-cover is a mixin
     @include background-cover;
     .overlay {
       position: absolute;

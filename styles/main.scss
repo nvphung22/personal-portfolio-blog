@@ -1,8 +1,10 @@
 @import "./shared/fonts";
 @import "./shared/colors";
+@import "./shared/mixins";
 
 // PAGES
 @import "./index";
+@import "./about";
 @import "./portfolios";
 @import "./blog";
 
