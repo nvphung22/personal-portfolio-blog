@@ -10,15 +10,35 @@ class Index extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      isFlipping: false
+    }
+
     this.roles = ['Developer', 'Tech Lover', 'Team Player', 'Course Creater', 'React.js', 'Angular'];
   }
 
-  render() {
+  componentDidMount() {
+    this.flipCard();
+  }
 
-    const {isAuthenticated, user} = this.props.auth; 
+  componentWillUnmount() {
+    this.flipCardInterval && clearInterval(this.flipCardInterval);
+  }
+
+  flipCard() {
+    this.flipCardInterval = setInterval(() => {
+      this.setState({
+        isFlipping: !this.state.isFlipping
+      })
+    }, 5000);
+  }
+
+  render() {
+    const { isFlipping } = this.state;
+    const { isAuthenticated, user } = this.props.auth;
 
     return (
-      <BaseLayout className="cover" {...this.props.auth} headerType='index'>
+      <BaseLayout className={`cover ${isFlipping ? 'cover-2' : 'cover-1'}`} {...this.props.auth} headerType='index'>
         <div className="main-section">
           <div className="background-image">
             <img src="/static/images/background-index.png" />
@@ -27,16 +47,28 @@ class Index extends React.Component {
             <Row>
               <Col md="6">
                 <div className="hero-section">
-                  <div className={`flipper`}>
-                    <div className="back">
+                  <div className={`flipper ${isFlipping ? 'isFlipping' : ''}`}>
+                    <div className="front">
                       <div className="hero-section-content">
                         <h2> Full Stack Web Developer </h2>
                         <div className="hero-section-content-intro">
                           Have a look at my portfolio and job history.
                         </div>
                       </div>
-                      <img className="image" src="/static/images/section-1.png"/>
+                      <img className="image" src="/static/images/cover-1.png" />
                       <div className="shadow-custom">
+                        <div className="shadow-inner"> </div>
+                      </div>
+                    </div>
+                    <div className="back">
+                      <div className="hero-section-content">
+                        <h2> English - Vietnamese Translator </h2>
+                        <div className="hero-section-content-intro">
+                          I'm also interested in translation.
+                        </div>
+                      </div>
+                      <img className="image" src="/static/images/cover-2.png" />
+                      <div className="shadow-custom shadow-custom-2">
                         <div className="shadow-inner"> </div>
                       </div>
                     </div>
