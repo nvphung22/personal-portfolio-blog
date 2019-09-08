@@ -43,13 +43,13 @@ export default class Header extends React.Component {
 
     this.toggle = this.toggle.bind(this);
     this.state = {
-      isOpen: false,
+      isMenuOpen: false,
       isBlogMenuOpen: false,
     };
   }
   toggle() {
     this.setState({
-      isOpen: !this.state.isOpen
+      isMenuOpen: !this.state.isMenuOpen
     });
   }
 
@@ -96,13 +96,15 @@ export default class Header extends React.Component {
   }
 
   render() {
-    const { isAuthenticated, className } = this.props
+    const { isAuthenticated, className } = this.props;
+    const { isMenuOpen } = this.state;
+    const menuOpenClass = isMenuOpen ? 'menu-open' : 'menu-close';
     return (
       <div>
-        <Navbar className={`port-navbar port-nav-base absolute ${className}`} color="transparent" dark expand="md">
+        <Navbar className={`port-navbar port-nav-base absolute ${className} ${menuOpenClass}`} color="transparent" dark expand="md">
           <NavbarBrand className="port-navbar-brand" href="/">PhungNV</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
-          <Collapse isOpen={this.state.isOpen} navbar>
+          <Collapse isOpen={isMenuOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem className="port-navbar-item">
                 <BootstrapNavLink route='/' title='Home' />
