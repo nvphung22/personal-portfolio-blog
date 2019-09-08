@@ -17,9 +17,10 @@ const BaseLayout = (props) => {
         <meta property="og:url" content='http://localhost:3000' />
         <meta property="og:type" content="website" />
         <meta property="og:description" content="My name is Phung Nguyen and I am an experienced web developer. I have a Bachelor's degree in Software Engineering and several years of experience working in web development." />
-        {canonical && <link rel='canonical' href={`http://localhost:3000${canonical}`}></link>}
-        <script src="https://kit.fontawesome.com/494dbe5a09.js"></script>
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
+        {canonical && <link rel='canonical' href={`http://localhost:3000${canonical}`} />}
+        <link rel="icon" type="image/ico" href="/static/favicon.ico" />
+        <script src="https://kit.fontawesome.com/494dbe5a09.js" />
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
       </Head>
       <div className="layout-container" >
         <Header className={`port-nav-${headerType}`} isAuthenticated={isAuthenticated} user={user} isSiteOwner={isSiteOwner} />
