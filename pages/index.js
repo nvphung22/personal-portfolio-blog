@@ -14,7 +14,7 @@ class Index extends React.Component {
       isFlipping: false
     }
 
-    this.roles = ['Developer', 'Tech Lover', 'Team Player', 'Course Creater', 'React.js', 'Angular'];
+    this.roles = ['React.js', 'Next.js', 'Node.js', 'Django (Python)', 'MySQL', 'MongoDB', 'PostgresQL', 'Amazon Web Service', 'PWA', 'SPA', 'Ngnix', 'Linux', 'Server Side Rendering', 'Client Side Rendering'];
   }
 
   componentDidMount() {
@@ -39,9 +39,9 @@ class Index extends React.Component {
 
     return (
       <BaseLayout className={`cover ${isFlipping ? 'cover-2' : 'cover-1'}`}
-                  {...this.props.auth}
-                  headerType='index'
-                  title='PhungNV - Portfolio & Blog'
+        {...this.props.auth}
+        headerType='index'
+        title='PhungNV - Portfolio & Blog'
       >
         <div className="main-section">
           <div className="background-image">
