@@ -3,7 +3,7 @@ import Header from '../shared/Header';
 import Head from 'next/head';
 
 const BaseLayout = (props) => {
-  const { className, children, isAuthenticated, user, isSiteOwner, title } = props;
+  const { className, children, isAuthenticated, user, isSiteOwner, title, canonical } = props;
   const headerType = props.headerType || 'default'
 
   return (
@@ -17,6 +17,7 @@ const BaseLayout = (props) => {
         <meta property="og:url" content='http://localhost:3000' />
         <meta property="og:type" content="website" />
         <meta property="og:description" content="My name is Phung Nguyen and I am an experienced web developer. I have a Bachelor's degree in Software Engineering and several years of experience working in web development." />
+        {canonical && <link rel='canonical' href={`http://localhost:3000${canonical}`}></link>}
         <script src="https://kit.fontawesome.com/494dbe5a09.js"></script>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
       </Head>
