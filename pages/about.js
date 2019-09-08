@@ -7,7 +7,7 @@ class About extends React.Component {
 
   render() {
     return (
-      <BaseLayout {...this.props.auth}>
+      <BaseLayout title='PhungNV - Learn More About Me' {...this.props.auth}>
         <BasePage className='about-page' title=''>
           <Row className="mt-5">
             <Col md="6">

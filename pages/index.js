@@ -38,7 +38,11 @@ class Index extends React.Component {
     const { isAuthenticated, user } = this.props.auth;
 
     return (
-      <BaseLayout className={`cover ${isFlipping ? 'cover-2' : 'cover-1'}`} {...this.props.auth} headerType='index'>
+      <BaseLayout className={`cover ${isFlipping ? 'cover-2' : 'cover-1'}`}
+                  {...this.props.auth}
+                  headerType='index'
+                  title='PhungNV - Portfolio & Blog'
+      >
         <div className="main-section">
           <div className="background-image">
             <img src="/static/images/background-index.png" />
