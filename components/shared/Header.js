@@ -7,15 +7,20 @@ import {
   NavbarToggler,
   NavbarBrand,
   Nav,
-  NavItem
+  NavItem,
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem
 } from 'reactstrap';
 import auth0Client from '../../services/auth0'
 
 const BootstrapNavLink = (props) => {
   const { route, title } = props;
+  const className = props.className || "";
   return (
     <ActiveLink route={route} classActiveName='active'>
-      <a className='nav-link port-navbar-link'>{title}</a>
+      <a className={`nav-link port-navbar-link ${className}`}>{title}</a>
     </ActiveLink>
   )
 }
@@ -38,7 +43,8 @@ export default class Header extends React.Component {
 
     this.toggle = this.toggle.bind(this);
     this.state = {
-      isOpen: false
+      isOpen: false,
+      isBlogMenuOpen: false,
     };
   }
   toggle() {
@@ -46,6 +52,49 @@ export default class Header extends React.Component {
       isOpen: !this.state.isOpen
     });
   }
+
+  toggleBlogMenu = () => {
+    this.setState({
+      isBlogMenuOpen: !this.state.isBlogMenuOpen
+    });
+  }
+
+  renderBlogMenu() {
+    const { isSiteOwner } = this.props;
+    if (isSiteOwner) {
+      return (
+        <Dropdown className="port-navbar-link port-dropdown-menu" nav isOpen={this.state.isBlogMenuOpen} toggle={this.toggleBlogMenu}>
+          <DropdownToggle className="port-dropdown-toggle" nav caret>
+            Blog
+          </DropdownToggle>
+          <DropdownMenu>
+            <DropdownItem>
+              <BootstrapNavLink className="port-dropdown-item"
+                route="/blogs"
+                title="Blogs" />
+            </DropdownItem>
+            <DropdownItem>
+              <BootstrapNavLink className="port-dropdown-item"
+                route="/blogs/new"
+                title="Create a Blog" />
+            </DropdownItem>
+            <DropdownItem>
+              <BootstrapNavLink className="port-dropdown-item"
+                route="/blogs/dashboard"
+                title="Blogs Dashboard" />
+            </DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
+      )
+    } else {
+      return (
+        <NavItem className="port-navbar-item">
+          <BootstrapNavLink route='/blogs' title='Blog' />
+        </NavItem>
+      )
+    }
+  }
+
   render() {
     const { isAuthenticated, className } = this.props
     return (
@@ -64,9 +113,7 @@ export default class Header extends React.Component {
               <NavItem className="port-navbar-item">
                 <BootstrapNavLink route='/portfolios' title='Portfolio' />
               </NavItem>
-              <NavItem className="port-navbar-item">
-                <BootstrapNavLink route='/blogs' title='Blog' />
-              </NavItem>
+              {this.renderBlogMenu()}
               <NavItem className="port-navbar-item">
                 <BootstrapNavLink route='/cv' title='CV' />
               </NavItem>
