@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import ActiveLink from '../ActiveLink';
 import {
   Collapse,
   Navbar,
@@ -13,9 +14,9 @@ import auth0Client from '../../services/auth0'
 const BootstrapNavLink = (props) => {
   const { route, title } = props;
   return (
-    <Link href={route}>
+    <ActiveLink route={route} classActiveName='active'>
       <a className='nav-link port-navbar-link'>{title}</a>
-    </Link>
+    </ActiveLink>
   )
 }
 
