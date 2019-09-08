@@ -45,7 +45,7 @@ class Index extends React.Component {
       >
         <div className="main-section">
           <div className="background-image">
-            <img src="/static/images/background-index.png" />
+            <img alt='background welcome' src="/static/images/background-index.png" />
           </div>
           <Container>
             <Row>
@@ -59,7 +59,7 @@ class Index extends React.Component {
                           Have a look at my portfolio and job history.
                         </div>
                       </div>
-                      <img className="image" src="/static/images/cover-1.png" />
+                      <img alt='guy programming' className="image" src="/static/images/cover-1.png" />
                       <div className="shadow-custom">
                         <div className="shadow-inner"> </div>
                       </div>
@@ -71,7 +71,7 @@ class Index extends React.Component {
                           I'm also interested in translation.
                         </div>
                       </div>
-                      <img className="image" src="/static/images/cover-2.png" />
+                      <img alt='guy programming' className="image" src="/static/images/cover-2.png" />
                       <div className="shadow-custom shadow-custom-2">
                         <div className="shadow-inner"> </div>
                       </div>
