@@ -12,6 +12,11 @@ const BaseLayout = (props) => {
         <title>{title}</title>
         <meta name="description" content="My name is Phung Nguyen and I am an experienced web developer. I have a Bachelor's degree in Software Engineering and several years of experience working in web development. Throughout my career, I have acquired advanced technical knowledge and the ability to explain programming topics clearly and in detail to a broad audience. I hope to have a change to work with you one day." />
         <meta name="keywords" content="phungnv profile, phungnv blog, phungnv portfolio, phungnv developer, phungnv freelancer, phungnv programming" />
+        <meta property="og:title" content="PhungNV - programmer, developer, bloger" />
+        <meta property="og:locale" content="en_EU" />
+        <meta property="og:url" content='http://localhost:3000' />
+        <meta property="og:type" content="website" />
+        <meta property="og:description" content="My name is Phung Nguyen and I am an experienced web developer. I have a Bachelor's degree in Software Engineering and several years of experience working in web development." />
         <script src="https://kit.fontawesome.com/494dbe5a09.js"></script>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
       </Head>
