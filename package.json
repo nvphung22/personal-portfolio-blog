@@ -36,6 +36,7 @@
     "next": "^7.0.2",
     "next-routes": "^1.4.2",
     "node-sass": "^4.9.4",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
     "react": "^16.6.0",
     "react-datepicker": "^2.8.0",
     "react-dom": "^16.6.0",
