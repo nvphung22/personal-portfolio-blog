@@ -4,7 +4,7 @@ const next = require('next');
 const routes = require('../routes');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-
+const compression = require('compression');
 // SERVICE
 const authService = require('./services/auth')
 
@@ -46,12 +46,14 @@ mongoose.connect(config.DB_URI, { useNewUrlParser: true })
         console.log(err);
     })
 
-// if you want to async...await
-async () => (await mongoose.connect(config.DB_URI, { useNewUrlParser: true }))();
+// or if you want to async...await to connect to DB, use this
+// async () => (await mongoose.connect(config.DB_URI, { useNewUrlParser: true }))();
 
 app.prepare()
     .then(() => {
         const server = express();
+
+        server.use(compression());
 
         server.use(bodyParser.json());
 
