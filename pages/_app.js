@@ -1,6 +1,7 @@
 import React from 'react';
 import App, { Container } from 'next/app';
 import { ToastContainer } from 'react-toastify';
+import LoadFonts from '../helpers/Fonts';
 
 // Stylings
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -24,6 +25,11 @@ export default class MyApp extends App {
     }
 
     return { pageProps, auth }
+  }
+
+  async componentDidMount() {
+    // load fonts on Client side
+    await LoadFonts();
   }
 
   render() {

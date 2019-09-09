@@ -26,6 +26,7 @@
     "emotion": "^10.0.14",
     "express": "^4.16.4",
     "express-jwt": "^5.3.1",
+    "fontfaceobserver": "^2.1.0",
     "formik": "^1.5.8",
     "immutable": "^4.0.0-rc.12",
     "js-cookie": "^2.2.1",
