@@ -114,6 +114,11 @@ export default class SlateEditor extends React.Component {
                     renderBlock={renderBlock}
                     renderEditor={this.renderEditor}
                 />
+                <style jsx>
+                    {`
+                        @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+                    `}
+                </style>
             </React.Fragment>
         )
     }
