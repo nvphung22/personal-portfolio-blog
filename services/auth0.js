@@ -3,12 +3,17 @@ import Cookies from 'js-cookie';
 import jwt from 'jsonwebtoken';
 import axios from 'axios';
 import { getCookieFromReq } from '../helpers/utils';
+
+// It is not possible to destructure process.env variables
+// 
+const AUTH0_CLIENT_ID = process.env.AUTH0_CLIENT_ID;
+const BASE_URL = process.env.BASE_URL;
 class Auth0 {
     constructor() {
         this.auth0 = new auth0.WebAuth({
             domain: 'phungnv.auth0.com',
-            clientID: 'B10LNJYgqmnCkpbvYw2JnQXG4Ej6IFYl',
-            redirectUri: 'http://localhost:3000/callback',
+            clientID: AUTH0_CLIENT_ID,
+            redirectUri: `${BASE_URL}/callback`,
             responseType: 'token id_token',
             scope: 'openid profile'
         });
@@ -28,10 +33,10 @@ class Auth0 {
     }
 
     setSession = (authResult) => {
-        const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
-        Cookies.set('user', authResult.idTokenPayload);
+        // const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
+        // Cookies.set('user', authResult.idTokenPayload);
         Cookies.set('jwt', authResult.idToken);
-        Cookies.set('expiresAt', expiresAt);
+        // Cookies.set('expiresAt', expiresAt);
     }
 
     login = () => {
@@ -39,9 +44,9 @@ class Auth0 {
     }
 
     logout = () => {
-        Cookies.remove('user');
+        // Cookies.remove('user');
         Cookies.remove('jwt');
-        Cookies.remove('expiresAt');
+        // Cookies.remove('expiresAt');
         this.auth0.logout({
             returnTo: '', //Home
             clientID: 'B10LNJYgqmnCkpbvYw2JnQXG4Ej6IFYl'

@@ -18,6 +18,8 @@ const bookRoutes = require('./routes/book');
 const portfolioRoutes = require('./routes/portfolio');
 const blogRoutes = require('./routes/blog');
 
+const PORT = process.env.PORT || 3000;
+
 const robotsOptions = {
     root: path.join(__dirname, "../static"),
     headers: {
@@ -81,9 +83,9 @@ app.prepare()
             }
         });
 
-        server.use(handle).listen(3000, (err) => {
-            if (err) throw err
-            console.log('> Ready on http://localhost:3000')
+        server.use(handle).listen(PORT, (err) => {
+            if (err) throw err;
+            console.log(`> Ready on ${PORT}`)
         })
     })
     .catch((ex) => {

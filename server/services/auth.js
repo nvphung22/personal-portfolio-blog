@@ -1,13 +1,13 @@
 const jwt = require('express-jwt');
 const jwksRsa = require('jwks-rsa');
 
-const namespace = 'http://localhost:3000'
+const namespace = process.env.NAMESPACE;
 
 exports.checkJWT = jwt({
     secret: jwksRsa.expressJwtSecret({
         cache: true,
         rateLimit: true,
-        jwksRequestsPerMinute: 15,
+        jwksRequestsPerMinute: 50,
         jwksUri: 'https://phungnv.auth0.com/.well-known/jwks.json'
     }),
     audience: 'B10LNJYgqmnCkpbvYw2JnQXG4Ej6IFYl',

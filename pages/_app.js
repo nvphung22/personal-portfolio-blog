@@ -10,7 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 // Services
 import auth0 from '../services/auth0';
 
-const namespace = 'http://localhost:3000'
+const namespace = process.env.NAMESPACE;
 export default class MyApp extends App {
   // Component is each every Page we have
   static async getInitialProps({ Component, router, ctx }) {
