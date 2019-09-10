@@ -19,7 +19,6 @@ const validateInputs = (values) => {
     }
     return errors;
 }
-
 // const PortfolioCreateForm = (props) => (
 // destruct from PROPS
 const PortfolioCreateForm = ({ initialValues, onSubmit, error }) => (
@@ -82,7 +81,7 @@ const PortfolioCreateForm = ({ initialValues, onSubmit, error }) => (
                         </Alert>
                     }
                     <Button size="lg" outline color="success" type="submit" disabled={isSubmitting}>
-                        Create
+                        {initialValues.title ? 'Update' : 'Create'}
                     </Button>
                 </Form>
             )}
