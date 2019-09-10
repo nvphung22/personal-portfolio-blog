@@ -1,5 +1,5 @@
 import React from 'react';
-import App, { Container } from 'next/app';
+import App from 'next/app';
 import { ToastContainer } from 'react-toastify';
 // import LoadFonts from '../helpers/Fonts';
 
@@ -37,10 +37,10 @@ export default class MyApp extends App {
     const { Component, pageProps, auth } = this.props
 
     return (
-      <Container>
+      <React.Fragment>
         <ToastContainer />
         <Component {...pageProps} auth={auth} />
-      </Container>
+      </React.Fragment>
     )
   }
 }
