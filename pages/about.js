@@ -35,6 +35,7 @@ class About extends React.Component {
                   Contact me at{" "}
                   <a target="_blank" href="mailto:phungnv.bkdn@gmail.com">phungnv.bkdn@gmail.com</a>
                 </p>
+                <div class="LI-profile-badge" data-version="v1" data-size="medium" data-locale="en_US" data-type="horizontal" data-theme="light" data-vanity="phụng-nguyễn-706447193"><a class="LI-simple-link" href='https://vn.linkedin.com/in/ph%E1%BB%A5ng-nguy%E1%BB%85n-706447193?trk=profile-badge'>Phụng Nguyễn</a></div>
               </div>
             </Col>
           </Row>
