@@ -32,14 +32,6 @@ export default class MyDocument extends Document {
                     <Main />
                     <NextScript />
                 </body>
-                <style global jsx>{`
-                    html,
-                    body {
-                        height: 100%;
-                        width: 100%;
-                        font-family: "Montserrat", "Helvetica";
-                    }
-                `}</style>
             </Html>
         )
     }
