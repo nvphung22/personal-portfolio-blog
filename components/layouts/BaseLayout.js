@@ -1,6 +1,15 @@
 import React from 'react';
 import Header from '../shared/Header';
 import Head from 'next/head';
+import NProgress from 'nprogress';
+import Router from 'next/router';
+
+Router.onRouteChangeStart = url => {
+  NProgress.start();
+}
+
+Router.onRouteChangeComplete = () => NProgress.done();
+Router.onRouteChangeError = () => NProgress.done();
 
 const BaseLayout = (props) => {
   const { className, children, isAuthenticated, user, isSiteOwner, canonical } = props;
@@ -20,6 +29,8 @@ const BaseLayout = (props) => {
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" />
         {canonical && <link rel='canonical' href={`${process.env.BASE_URL}${canonical}`} />}
         <link rel="icon" type="image/ico" href="/static/favicon.ico" />
+        {/* NProgress */}
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.css' />
       </Head>
       <div className="layout-container" >
         <Header className={`port-nav-${headerType}`} isAuthenticated={isAuthenticated} user={user} isSiteOwner={isSiteOwner} />
