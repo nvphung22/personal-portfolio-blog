@@ -1,11 +1,10 @@
 import React from 'react';
 import Typed from 'react-typed';
-
+import Particles from 'react-particles-js';
 import BaseLayout from '../components/layouts/BaseLayout';
-
 import { Container, Row, Col } from 'reactstrap';
 
-class Index extends React.Component {
+export default class Index extends React.Component {
 
   constructor(props) {
     super(props);
@@ -30,7 +29,114 @@ class Index extends React.Component {
       this.setState({
         isFlipping: !this.state.isFlipping
       })
-    }, 5000);
+    }, 10000);
+  }
+
+  renderParticles(isFlipping) {
+    return !isFlipping ? (
+      <Particles
+        params={{
+          "particles": {
+            "number": {
+              "value": 10,
+              "density": {
+                "enable": true,
+                "value_area": 800
+              }
+            },
+            "line_linked": {
+              "enable": true
+            },
+            "move": {
+              "speed": 10,
+              "out_mode": "out"
+            },
+            "shape": {
+              "type": [
+                "images",
+              ],
+              "images": [
+                {
+                  "src": "/static/particles/react.png",
+                  "height": 30,
+                  "width": 30
+                },
+                {
+                  "src": "/static/particles/node.png",
+                  "height": 30,
+                  "width": 30
+                },
+                {
+                  "src": "/static/particles/angular.png",
+                  "height": 30,
+                  "width": 30
+                },
+                {
+                  "src": "/static/particles/mongodb.png",
+                  "height": 30,
+                  "width": 30
+                },
+                {
+                  "src": "/static/particles/html5.png",
+                  "height": 30,
+                  "width": 30
+                },
+                {
+                  "src": "/static/particles/js.png",
+                  "height": 30,
+                  "width": 30
+                },
+                {
+                  "src": "/static/particles/python.png",
+                  "height": 30,
+                  "width": 30
+                },
+                {
+                  "src": "/static/particles/vue.png",
+                  "height": 20,
+                  "width": 20
+                },
+                {
+                  "src": "/static/particles/css.png",
+                  "height": 20,
+                  "width": 20
+                }
+              ]
+            },
+            "size": {
+              "value": 30,
+              "random": true,
+              "anim": {
+                "enable": true,
+                "speed": 1,
+                "size_min": 10,
+                "sync": false
+              }
+            }
+          },
+          "retina_detect": true
+        }} />
+    ) : (
+        <Particles
+          params={{
+            "particles": {
+              "number": {
+                "value": 50
+              },
+              "size": {
+                "value": 3
+              }
+            },
+            "interactivity": {
+              "events": {
+                "onhover": {
+                  "enable": true,
+                  "mode": "repulse"
+                }
+              }
+            }
+          }} />
+      )
   }
 
   render() {
@@ -45,12 +151,13 @@ class Index extends React.Component {
       >
         <div className="main-section">
           <div className="background-image">
-            <img alt='background welcome' src="/static/images/background-index.png" />
+            {this.renderParticles(isFlipping)}
+            {/* <img alt='background welcome' src="/static/images/background-index.png" /> */}
           </div>
           <Container>
             <Row>
               <Col md="6">
-                <div className="hero-section">
+                <div className="hero-section" onClick={() => this.setState({isFlipping: !this.state.isFlipping})}>
                   <div className={`flipper ${isFlipping ? 'isFlipping' : ''}`}>
                     <div className="front">
                       <div className="hero-section-content">
@@ -115,8 +222,4 @@ class Index extends React.Component {
     )
   }
 }
-
-
-
-export default Index;
 
