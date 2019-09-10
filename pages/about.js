@@ -28,6 +28,13 @@ class About extends React.Component {
                   Throughout my career, I have acquired advanced technical knowledge and the ability to explain
                   programming topics clearly and in detail to a broad audience.
                 </p>
+                <p>
+                  My Github: <a target="_blank" href="https://github.com/phungnv">PhungNV</a>
+                </p>
+                <p>
+                  Contact me at{" "}
+                  <a target="_blank" href="mailto:phungnv.bkdn@gmail.com">phungnv.bkdn@gmail.com</a>
+                </p>
               </div>
             </Col>
           </Row>
