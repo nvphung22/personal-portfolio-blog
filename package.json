@@ -41,6 +41,7 @@
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "react": "^16.9.0",
     "react-datepicker": "^2.8.0",
+    "react-device-detect": "^1.7.5",
     "react-dom": "^16.9.0",
     "react-particles-js": "^2.7.0",
     "react-toastify": "^5.3.2",

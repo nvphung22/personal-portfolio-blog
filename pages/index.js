@@ -3,7 +3,9 @@ import Typed from 'react-typed';
 import Particles from 'react-particles-js';
 import BaseLayout from '../components/layouts/BaseLayout';
 import { Container, Row, Col } from 'reactstrap';
-
+import {
+  isMobile
+} from "react-device-detect";
 export default class Index extends React.Component {
 
   constructor(props) {
@@ -151,13 +153,12 @@ export default class Index extends React.Component {
       >
         <div className="main-section">
           <div className="background-image">
-            {this.renderParticles(isFlipping)}
-            {/* <img alt='background welcome' src="/static/images/background-index.png" /> */}
+            {isMobile ? <img alt='background welcome' src="/static/images/background-index.png" /> : this.renderParticles(isFlipping)}
           </div>
           <Container>
             <Row>
               <Col md="6">
-                <div className="hero-section" onClick={() => this.setState({isFlipping: !this.state.isFlipping})}>
+                <div className="hero-section" onClick={() => this.setState({ isFlipping: !this.state.isFlipping })}>
                   <div className={`flipper ${isFlipping ? 'isFlipping' : ''}`}>
                     <div className="front">
                       <div className="hero-section-content">
