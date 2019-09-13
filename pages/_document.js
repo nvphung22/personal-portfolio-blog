@@ -28,6 +28,7 @@ export default class MyDocument extends Document {
                     <link rel="icon" type="image/ico" href="/static/favicon.ico" />
                     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.css' />
                     <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
+                    <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/6401713.js"></script>
                 </Head>
                 <body>
                     <Main />

@@ -3,7 +3,6 @@
   width: 100%;
   z-index: 15;
   padding: 40px;
-
   .port-navbar {
     &-brand {
       color: white;
@@ -56,6 +55,7 @@
 .port-navbar.port-nav-base.port-nav-default {
   padding: 30px;
   background-color: $secondary !important;
+  position: fixed;
 }
 
 .bg-transparent.menu-open {
