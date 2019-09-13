@@ -11,7 +11,7 @@ class Cv extends React.Component {
       <BaseLayout {...this.props.auth}>
         <BasePage title="Preview of my CV" className="cv-page">
           <Row>
-            <Col md={{ size: 8, offset: 2 }}>
+            <Col xs={{ size: 10, offset: 1 }}>
               <div className="cv-title">
                 <a download="phung_cv.pdf" className="btn btn-success" href="/static/phung_cv.pdf">
                   Download
