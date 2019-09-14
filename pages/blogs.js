@@ -62,9 +62,9 @@ class Blogs extends React.Component {
 							{
 								this.renderBlogs(publishedBlogs)
 							}
-							<div className="clearfix">
+							{/* <div className="clearfix">
 								<a className="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
-							</div>
+							</div> */}
 						</Col>
 					</Row>
 

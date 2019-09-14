@@ -16,7 +16,7 @@ exports.getUserBlogs = (req, res) => {
 
 exports.getPublishedBlogs = (req, res) => {
     Blog.find({ status: 'published' })
-        .sort({ 'startDate': -1 })
+        .sort({ 'createdAt': -1 })
         .exec((err, allBlogs) => {
             if (err) {
                 return res.status(422).send(err);
