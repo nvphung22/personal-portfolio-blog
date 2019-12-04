@@ -25,8 +25,7 @@ class About extends React.Component {
                   on a wide range of technologies and projects with Javascript and Python.
                 </p>
                 <p>
-                  Throughout my career, I have acquired advanced technical knowledge and the ability to explain
-                  programming topics clearly and in detail to a broad audience.
+                  Throughout my career, I always look for a challenging role in a reputable organization to utilize my technical, database, and management skills for the growth of the organization as well as to enhance my knowledge about new and emerging trends in the IT sector.
                 </p>
                 <p>
                   My Github: <a target="_blank" href="https://github.com/phungnv">PhungNV</a>

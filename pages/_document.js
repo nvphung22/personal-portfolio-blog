@@ -19,7 +19,7 @@ export default class MyDocument extends Document {
                     <meta name="keywords" content="phungnv profile, phungnv blog, phungnv portfolio, phungnv developer, phungnv freelancer, phungnv programming" />
                     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                     <meta name="robots" content="index follow" />
-                    <meta property="og:title" content="PhungNV - programmer, developer, bloger" />
+                    <meta property="og:title" content="PhungNV - Full-stack Web Developer" />
                     <meta property="og:locale" content="en_EU" />
                     <meta property="og:url" content={`${process.env.BASE_URL}`} />
                     <meta property="og:type" content="website" />
